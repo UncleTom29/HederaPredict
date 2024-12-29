@@ -10,7 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@hashgraph/sdk": "^2.41.0",
+    "@hashgraph/hedera-wallet-connect": "^1.4.2",
+    "@hashgraph/proto": "^2.16.0-beta.4",
+    "@hashgraph/sdk": "^2.56.0",
+    "@walletconnect/modal": "^2.7.0",
+    "@walletconnect/modal-core": "^2.7.0",
+    "@walletconnect/qrcode-modal": "^1.8.0",
+    "@walletconnect/utils": "^2.17.3",
     "framer-motion": "^11.0.8",
     "hashconnect": "^0.1.7",
     "lucide-react": "^0.344.0",

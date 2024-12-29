@@ -1,57 +1,100 @@
-import { useState } from "react";
-import { HashConnect } from "hashconnect";
+// import {
+//   HederaSessionEvent,
+//   HederaJsonRpcMethod,
+//   DAppConnector,
+//   HederaChainId,
+// } from '@hashgraph/hedera-wallet-connect'
+// import { LedgerId, TransferTransaction, TransactionId, AccountId, Hbar } from '@hashgraph/sdk'
+// import { SessionTypes } from '@walletconnect/types';
 
-export interface WalletData {
-  topic: string;
-  pairingString: string;
-  privateKey: string;
-  pairedWalletData: null;
-  pairedAccounts: string[];
-}
+// const projectId = 'your-project-id-from-wallet-connect';
+// const metadata = {
+//   name: 'MydApp',
+//   description: 'My dApp does things.',
+//   url: 'https://mywebsite.com',
+//   icons: ['https://mywebsite.com/logo.jpg'],
+// };
 
-export const useWalletConnect = () => {
-  const [walletData, setWalletData] = useState<WalletData | null>(null);
-  const [hashconnect, setHashconnect] = useState<HashConnect | null>(null);
+// let dAppConnector: DAppConnector;
 
-  const connectWallet = async () => {
-    console.log(`\n=======================================`);
-    console.log("- Connecting wallet...");
+// // Session handling function
+// function handleNewSession(session: SessionTypes.Struct) {
+//   const sessionAccount = session.namespaces?.hedera?.accounts?.[0]
+//   const sessionParts = sessionAccount?.split(':')
+//   const accountId = sessionParts.pop()
+//   const network = sessionParts.pop()
 
-    let saveData: WalletData = {
-      topic: "",
-      pairingString: "",
-      privateKey: "",
-      pairedWalletData: null,
-      pairedAccounts: [],
-    };
-    let appMetadata = {
-      name: "Hedera dApp Days",
-      description: "Let's buidl a dapp on Hedera",
-      icon: "https://raw.githubusercontent.com/ed-marquez/hedera-dapp-days/testing/src/assets/hederaLogo.png",
-    };
+//   if (!accountId) {
+//     return
+//   } else {
+//     localStorage.setItem('hederaAccountId', accountId)
+//     localStorage.setItem('hederaNetwork', network)
+//     console.log('sessionAccount is', accountId, network)
+//   }
+// }
 
-    let hashconnect = new HashConnect();
+// // Initialize and set up event listeners
+// async function initializeWalletConnect() {
+//   dAppConnector = new DAppConnector(
+//     metadata,
+//     LedgerId.TESTNET,
+//     projectId,
+//     Object.values(HederaJsonRpcMethod),
+//     [HederaSessionEvent.ChainChanged, HederaSessionEvent.AccountsChanged],
+//     [HederaChainId.Mainnet],
+//   )
+//   await dAppConnector.init({ logger: 'error' })
 
-    // Initialize HashConnect
-    const initData = await hashconnect.init(appMetadata);
-    saveData.privateKey = initData.privKey;
-    console.log(`- Private key for pairing: ${saveData.privateKey}`);
+//   dAppConnector.onSessionIframeCreated = (session) => {
+//     handleNewSession(session)
+//   }
+// }
 
-    // Connect and store the topic
-    const state = await hashconnect.connect();
-    saveData.topic = state.topic;
-    console.log(`- Pairing topic is: ${saveData.topic}`);
+// // Connect wallet function
+// async function connectWallet() {
+//   const session = await dAppConnector.openModal()
+//   handleNewSession(session)
+// }
 
-    // Generate a pairing string
-    saveData.pairingString = hashconnect.generatePairingString(state, "testnet", false);
+// // Example transfer function
+// // async function transferHbar(fromAccountId, toAccountId, amount) {
+// //   try {
+// //     // Create the transaction
+// //     const transaction = new TransferTransaction()
+// //       .setTransactionId(TransactionId.generate(fromAccountId))
+// //       .addHbarTransfer(AccountId.fromString(fromAccountId), new Hbar(-amount))
+// //       .addHbarTransfer(AccountId.fromString(toAccountId), new Hbar(amount))
 
-    // Find local wallets and connect
-    hashconnect.findLocalWallets();
-    hashconnect.connectToLocalWallet(saveData.pairingString);
+// //     // Get the signer for the connected account
+// //     const accountId = localStorage.getItem('hederaAccountId')
+// //     const signer = dAppConnector.signers.find(
+// //       (signer_) => signer_.getAccountId().toString() === accountId,
+// //     )
 
-    setWalletData(saveData);
-    setHashconnect(hashconnect);
-  };
+// //     // Sign and execute the transaction
+// //     const signedTx = await transaction.freezeWithSigner(signer)
+// //     const executedTx = await signedTx.executeWithSigner(signer)
+// //     const receipt = await executedTx.getReceiptWithSigner(signer)
 
-  return { walletData, hashconnect, connectWallet };
-};
+// //     return receipt
+// //   } catch (error) {
+// //     console.error('Transfer failed:', error)
+// //     throw error
+// //   }
+// // }
+
+// // Usage example
+// (async () => {
+//   await initializeWalletConnect()
+
+//   // Connect wallet when needed
+//   await connectWallet()
+
+//   // Example transfer
+//   // const receipt = await transferHbar(
+//   //   '0.0.123456',
+//   //   '0.0.123457',
+//   //   1, // amount in HBAR
+//   // )
+//   // console.log('Transfer complete:', receipt)
+// })()
