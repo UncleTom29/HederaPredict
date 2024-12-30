@@ -2,8 +2,17 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import NetworkAnimation from './NetworkAnimation';
+import { useNavigate } from "react-router-dom";
+
 
 const Hero = () => {
+
+  const navigate = useNavigate();
+
+const handleLaunchClick = () => {
+  navigate("/dapp"); // Navigate to /app
+};
+
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
       <NetworkAnimation />
@@ -31,13 +40,13 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg text-white font-semibold hover:from-blue-600 hover:to-emerald-600 transition-all duration-300 flex items-center justify-center gap-2 group">
+          <button onClick={handleLaunchClick} className="px-8 py-4 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg text-white font-semibold hover:from-blue-600 hover:to-emerald-600 transition-all duration-300 flex items-center justify-center gap-2 group">
             Get Started Now
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
-          <button className="px-8 py-4 border-2 border-blue-500 text-blue-400 rounded-lg font-semibold hover:bg-blue-500/10 transition-all duration-300">
+          {/* <button className="px-8 py-4 border-2 border-blue-500 text-blue-400 rounded-lg font-semibold hover:bg-blue-500/10 transition-all duration-300">
             Learn More
-          </button>
+          </button> */}
         </motion.div>
       </div>
     </div>

@@ -20,7 +20,7 @@ const Navigation = () => {
             <Link to="/" className="text-gray-300 hover:text-white transition-colors">
               Home
             </Link>
-            <Link to="/" className="text-gray-300 hover:text-white transition-colors">
+            <Link to="/#features" className="text-gray-300 hover:text-white transition-colors">
               Features
             </Link>
             {/* <Link to="/pricing" className="text-gray-300 hover:text-white transition-colors">
