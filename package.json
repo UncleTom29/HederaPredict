@@ -19,8 +19,11 @@
     "@walletconnect/modal-core": "^2.7.0",
     "@walletconnect/qrcode-modal": "^1.8.0",
     "@walletconnect/utils": "^2.17.3",
+    "@web3modal/ethereum": "^2.7.1",
+    "@web3modal/react": "^2.7.1",
     "class-variance-authority": "^0.7.1",
     "dotenv": "^16.4.7",
+    "ethers": "^6.13.4",
     "framer-motion": "^11.0.8",
     "hashconnect": "^0.1.7",
     "lodash": "^4.17.21",
@@ -32,7 +35,8 @@
     "react-router-dom": "^6.22.2",
     "react-toastify": "^11.0.2",
     "recharts": "^2.12.2",
-    "tailwind-merge": "^2.6.0"
+    "tailwind-merge": "^2.6.0",
+    "wagmi": "^2.14.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
